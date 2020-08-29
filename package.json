@@ -37,8 +37,7 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@squareboat/nest-firebase": "0.0.2",
-    "aws-sdk": "^2.738.0"
+    "@squareboat/nest-firebase": "0.0.2"
   },
   "peerDependencies": {
     "@nestjs/common": "^6.7.0 || ^7.0.0",
