@@ -2,8 +2,8 @@ import { NotificationChannel } from './channel';
 import { Notifiable } from './notifiable';
 
 export abstract class NotificationTemplate {
-  private notifiable: Notifiable;
-  private payload: Record<string, any>;
+  private notifiable!: Notifiable;
+  private payload!: Record<string, any>;
 
   setNotifiable(notifiable: Notifiable): this {
     this.notifiable = notifiable;

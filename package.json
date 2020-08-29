@@ -33,11 +33,12 @@
   "devDependencies": {
     "@nestjs/common": "^7.4.2",
     "@nestjs/core": "^7.4.2",
-    "@types/node": "^14.0.27",
+    "@types/node": "^14.6.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "aws-sdk": "^2.732.0"
+    "@squareboat/nest-firebase": "0.0.2",
+    "aws-sdk": "^2.738.0"
   },
   "peerDependencies": {
     "@nestjs/common": "^6.7.0 || ^7.0.0",

@@ -1,7 +1,11 @@
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 
 export interface NotificationOptions {
-  fcm: { serverKey: string };
+  channels: {
+    fcm: {
+      credentialsPath: string
+    }
+  };
 }
 
 export interface NotificationAsyncOptionsFactory {

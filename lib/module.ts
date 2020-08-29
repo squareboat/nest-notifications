@@ -1,4 +1,4 @@
-import { Module, DynamicModule, Provider } from '@nestjs/common';
+import { Module, DynamicModule, Provider, Type } from '@nestjs/common';
 import {
   NotificationOptions,
   NotificationAsyncOptions,
@@ -6,10 +6,20 @@ import {
 } from './interfaces';
 import { NOTIFICATION_OPTIONS } from './constants';
 import { NotificationService } from './service';
-import { FirebaseModule } from 'libs/firebase/src';
+import { FirebaseModule } from '@squareboat/nest-firebase';
+import { NotificationStorage } from './storage';
 
 @Module({
-  imports: [FirebaseModule],
+  imports: [FirebaseModule.registerAsync({
+    imports: [NotificationStorage],
+    useFactory: (storage: NotificationStorage) => {
+      const options = NotificationStorage.getConfig()
+      return {
+        credentialsPath: options.channels.fcm.credentialsPath,
+      }
+    },
+    inject: [NOTIFICATION_OPTIONS],
+  })],
 })
 export class NotificationModule {
   /**
@@ -55,11 +65,15 @@ export class NotificationModule {
       };
     }
 
+    const inject = [
+      (options.useClass || options.useExisting) as Type<NotificationOptions>,
+    ];
+
     return {
       provide: NOTIFICATION_OPTIONS,
       useFactory: async (optionsFactory: NotificationAsyncOptionsFactory) =>
         await optionsFactory.createNotificationOptions(),
-      inject: [options.useExisting || options.useClass],
+      inject,
     };
   }
 }

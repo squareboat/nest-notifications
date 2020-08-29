@@ -4,13 +4,14 @@ import {
   NotificationTemplate,
   Notifiable,
 } from '../generics';
-import { CloudMessaging } from 'libs/firebase/src/services/CloudMessaging';
+import { CloudMessaging } from '@squareboat/nest-firebase';
 
 export class FcmChannel extends NotificationChannel {
   async send(
     notifiable: Notifiable,
     notification: NotificationTemplate,
   ): Promise<NotificationReport> {
+    if (!('toPushNotification' in notification)) { return new NotificationReport(false); }
     const payload = await notification['toPushNotification']();
     const tokens = notifiable.getFcmTokens();
     if (!tokens.length || !Object.keys(payload).length)
