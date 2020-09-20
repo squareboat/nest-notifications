@@ -1,10 +1,13 @@
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 
+import { MailmanOptions } from '@squareboat/nest-mailman/dist/interfaces';
+
 export interface NotificationOptions {
   channels: {
     fcm: {
       credentialsPath: string
-    }
+    },
+    mail: MailmanOptions
   };
 }
 

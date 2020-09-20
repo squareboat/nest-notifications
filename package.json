@@ -1,5 +1,5 @@
 {
-  "name": "@squareboat/nest-storage",
+  "name": "@squareboat/nest-notification",
   "version": "0.0.4",
   "description": "Multi disk multi driver storage manager for NestJS 💿💾",
   "main": "dist/index.js",
@@ -37,7 +37,8 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "@squareboat/nest-firebase": "0.0.2"
+    "@squareboat/nest-firebase": "0.0.2",
+    "@squareboat/nest-mailman": "0.0.5"
   },
   "peerDependencies": {
     "@nestjs/common": "^6.7.0 || ^7.0.0",
