@@ -4,10 +4,10 @@ import { MailmanOptions } from '@squareboat/nest-mailman/dist/interfaces';
 
 export interface NotificationOptions {
   channels: {
-    fcm: {
+    fcm?: {
       credentialsPath: string
     },
-    mail: MailmanOptions
+    mail?: MailmanOptions
   };
 }
 

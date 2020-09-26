@@ -1,4 +1,4 @@
 export interface Notifiable {
-  getFcmTokens(): string | string[];
-  getMailRecipients(): string | string[];
+  getFcmTokens?(): string | string[];
+  getMailRecipients?(): string | string[];
 }
