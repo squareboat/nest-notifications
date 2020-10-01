@@ -37,6 +37,7 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@slack/web-api": "^5.12.0",
     "@squareboat/nest-firebase": "0.0.2",
     "@squareboat/nest-mailman": "0.0.5"
   },

@@ -1,0 +1,3 @@
+export const SLACK_QUEUE = 'SLACK_QUEUE';
+export const SLACK_OPTIONS = 'SLACK_OPTIONS';
+export const SEND_SLACK_MESSAGE='SEND_SLACK_MESSAGE';
