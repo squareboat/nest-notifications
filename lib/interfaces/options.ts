@@ -1,13 +1,15 @@
 import { ModuleMetadata, Type } from '@nestjs/common/interfaces';
 
 import { MailmanOptions } from '@squareboat/nest-mailman/dist/interfaces';
+import { SlackOptions } from '../internal/slack';
 
 export interface NotificationOptions {
   channels: {
     fcm?: {
       credentialsPath: string
     },
-    mail?: MailmanOptions
+    mail?: MailmanOptions,
+    slack?: SlackOptions,
   };
 }
 

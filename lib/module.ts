@@ -8,6 +8,7 @@ import { NOTIFICATION_OPTIONS } from './constants';
 import { NotificationService } from './service';
 import { FirebaseModule } from '@squareboat/nest-firebase';
 import { MailmanModule } from '@squareboat/nest-mailman';
+import { SlackModule } from './internal/slack';
 import { NotificationStorage } from './storage';
 
 @Module({
@@ -33,6 +34,16 @@ import { NotificationStorage } from './storage';
           password: '',
           from: '',
           path: ''
+        };
+      },
+      inject: [NOTIFICATION_OPTIONS],
+    }),
+    SlackModule.registerAsync({
+      imports: [NotificationStorage],
+      useFactory: (storage: NotificationStorage) => {
+        const options = NotificationStorage.getConfig()
+        return options.channels.slack || {
+          token: ''
         };
       },
       inject: [NOTIFICATION_OPTIONS],
