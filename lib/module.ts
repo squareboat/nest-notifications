@@ -49,6 +49,7 @@ import { NotificationStorage } from './storage';
       inject: [NOTIFICATION_OPTIONS],
     })
   ],
+  exports: [NOTIFICATION_OPTIONS]
 })
 export class NotificationModule {
   /**
