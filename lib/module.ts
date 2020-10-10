@@ -7,19 +7,49 @@ import {
 import { NOTIFICATION_OPTIONS } from './constants';
 import { NotificationService } from './service';
 import { FirebaseModule } from '@squareboat/nest-firebase';
+import { MailmanModule } from '@squareboat/nest-mailman';
+import { SlackModule } from './internal/slack';
 import { NotificationStorage } from './storage';
 
 @Module({
-  imports: [FirebaseModule.registerAsync({
-    imports: [NotificationStorage],
-    useFactory: (storage: NotificationStorage) => {
-      const options = NotificationStorage.getConfig()
-      return {
-        credentialsPath: options.channels.fcm.credentialsPath,
-      }
-    },
-    inject: [NOTIFICATION_OPTIONS],
-  })],
+  imports: [
+    FirebaseModule.registerAsync({
+      imports: [NotificationStorage],
+      useFactory: (storage: NotificationStorage) => {
+        const options = NotificationStorage.getConfig()
+        return {
+          credentialsPath: options.channels.fcm?.credentialsPath || '',
+        }
+      },
+      inject: [NOTIFICATION_OPTIONS],
+    }),
+    MailmanModule.registerAsync({
+      imports: [NotificationStorage],
+      useFactory: (storage: NotificationStorage) => {
+        const options = NotificationStorage.getConfig()
+        return options.channels.mail || {
+          host: '',
+          port: '',
+          username: '',
+          password: '',
+          from: '',
+          path: ''
+        };
+      },
+      inject: [NOTIFICATION_OPTIONS],
+    }),
+    SlackModule.registerAsync({
+      imports: [NotificationStorage],
+      useFactory: (storage: NotificationStorage) => {
+        const options = NotificationStorage.getConfig()
+        return options.channels.slack || {
+          token: ''
+        };
+      },
+      inject: [NOTIFICATION_OPTIONS],
+    })
+  ],
+  exports: [NOTIFICATION_OPTIONS]
 })
 export class NotificationModule {
   /**

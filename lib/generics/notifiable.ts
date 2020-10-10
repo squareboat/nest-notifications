@@ -1,3 +1,5 @@
 export interface Notifiable {
-  getFcmTokens(): string | string[];
+  getFcmTokens?(): string | string[];
+  getMailRecipients?(): string | string[];
+  getSlackChannel?(): string;
 }
